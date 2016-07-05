@@ -33,6 +33,23 @@ $snatch->post('/', function() {
 });
 ```
 
+Handle 404
+```php
+$snatch->missing(function() {
+	echo '404 error :c';
+});
+```
+
+Add custom wildcard
+```php
+// single
+$snatch->wildcard('wldcrd', 'regex');
+
+// multiple
+$snatch->wildcard(['wldcrd1' => 'regex1', 'wldcrd2' => 'regex2']]);
+```
+
+
 ### License
 
 Snatch is licensed under [MIT License](http://opensource.org/licenses/MIT).

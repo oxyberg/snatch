@@ -19,17 +19,14 @@ class Snatch {
 		),
 		$error;
 
-	// GET method
-	public function get($pattern, $callback) {
-		$this->match('GET', $pattern, $callback);
+	// register new routes
+	public function __call($verb, $args) {
+		if (in_array($verb, ['get', 'post', 'put', 'delete'])) {
+			$this->match($verb, $args[0], $args[1]);
+		}
 	}
 
-	// POST method
-	public function post($pattern, $callback) {
-		$this->match('POST', $pattern, $callback);
-	}
-
-	// 404 page
+	// register 404 page
 	public function missing($callback) {
 		$this->error = ($callback);
 	}

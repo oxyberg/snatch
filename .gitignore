@@ -1,0 +1,6 @@
+# os generated files
+.DS_Store
+Thumbs.db
+
+# sublime text generated files
+*.sublime-*

@@ -52,7 +52,7 @@ class Snatch {
 	// run router
 	public function run () {
 		// get request method
-		$method = $_SERVER['REQUEST_METHOD'];
+		$method = strtolower($_SERVER['REQUEST_METHOD']);
 
 		// handle all routes
 		$handled = 0;
@@ -60,7 +60,7 @@ class Snatch {
 
 		// 404
 		if ($handled === 0) {
-			if (is_callable($this->error)) call_user_func ($this->error);
+			if (is_callable($this->error)) call_user_func($this->error);
 			else header('HTTP/1.1 404 Not Found');
 		}
 	}
@@ -69,12 +69,12 @@ class Snatch {
 	private function handle($routes) {
 
 		$handled = 0;
-		$base = $this->current ();
+		$base = $this->current();
 
 		foreach ($routes as $pattern => $callback) {
 
 			if (preg_match_all($pattern, $base, $matches)) {
-				$params = array_map (function ($match) {
+				$params = array_map(function ($match) {
 					$var = explode('/', trim($match, '/'));
 					return isset($var[0]) ? $var[0] : null;
 				}, array_slice($matches[0], 1));
